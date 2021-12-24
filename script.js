@@ -30,9 +30,31 @@ var questionBank = [
     answer:4
     },
 ]
-var 
+
+var questionList = 0
+var timeObj;
+var counter = 90
 
 showResponse.addEventListener("click",  function() {
     document.getElementById("quiz-container").style.display = "block";
-  
+    timeObj = setInterval(() => {
+      timerHTML.textContent = counter;
+      if (counter > 1 ){
+          counter --
+      }
+      else{
+          alert('Times up!');
+      }
+
+    }, 1000);
+
+    quizstart();
 });
+
+function quizstart (){
+    questionHTML.textContent = questionBank[questionList].question 
+    button1HTML.textContent = questionBank[questionList].choices[0]
+    button2HTML.textContent = questionBank[questionList].choices[1]
+    button3HTML.textContent = questionBank[questionList].choices[2]
+    button4HTML.textContent = questionBank[questionList].choices[3]
+}
