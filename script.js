@@ -9,7 +9,7 @@ var button4HTML = document.getElementById('btn-4');
 var thiscontainerHTML = document.getElementById("quiz-container")
 thiscontainerHTML.style.display = "none";
 
-var correctwrongHTML = document.getElementById('correct-wrong');
+var correctwrongHTML = document.getElementById("correct-wrong");
 
 button1HTML.addEventListener("click", showresult);
 button2HTML.addEventListener("click", showresult);
@@ -21,10 +21,11 @@ var score = 0
 function showresult() {
     var useranswer = this.getAttribute('data-value');
     console.log(useranswer);
-
-    if (useranswer == questionBank[questionList].answer) {
+    debugger;
+    if (useranswer === questionBank[questionList].answer) {
         correctwrongHTML.textContent = "Correct"
         score += 5
+        console.log()
     }
     else {
         correctwrongHTML.textContent = "Wrong"
@@ -50,27 +51,23 @@ function showresult() {
 
 var questionBank = [
     {
-        question: "Question1",
-        choices: ["ri", "option2", "option3", "option4"],
+        question: "Which team is not an NFL team?",
+        choices: ["Chicago Tigers", "Detroit Lions", "Jacksonville Jaguars", "Carolina Panthers"],
         answer: 0
     }, {
-        question: "Question2",
-        choices: ["option1", "option2", "option3", "option4"],
+        question: "Which player has the most superbowl wins",
+        choices: ["Charles Haley", "Tom Brady", "Joe Montana", "Adam Vinatieri"],
         answer: 1
     }, {
-        question: "Question3",
-        choices: ["option1", "option2", "option3", "option4"],
+        question: "How long is a football field ",
+        choices: ["100 ft", "300ft", "360ft", "100yrds"],
         answer: 2
     }, {
-        question: "Question4",
-        choices: ["option1", "option2", "option3", "option4"],
+        question: "How was the temputure of the coldest nfl game?",
+        choices: ["32  degrees fahrenheit", "-20 degrees fahrenheit", "-15 degrees fahrenheit", "-9 degrees fahrenheit "],
         answer: 3
-    }, {
-        question: "Question5",
-        choices: ["option1", "option2", "option3", "option4"],
-        answer: 2
     },
-]
+];
 
 var questionList = 0
 var timeObj;
