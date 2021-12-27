@@ -8,8 +8,11 @@ var button3HTML = document.getElementById('btn-3');
 var button4HTML = document.getElementById('btn-4');
 var thiscontainerHTML = document.getElementById("quiz-container")
 thiscontainerHTML.style.display = "none";
-
+var removestartHTML = document.getElementById("removestart");
 var correctwrongHTML = document.getElementById("correct-wrong");
+
+
+
 
 button1HTML.addEventListener("click", showresult);
 button2HTML.addEventListener("click", showresult);
@@ -18,19 +21,19 @@ button4HTML.addEventListener("click", showresult);
 
 var score = 0
 
+
+
 function showresult() {
     var useranswer = this.getAttribute('data-value');
-    console.log(useranswer);
-    debugger;
-    if (useranswer === questionBank[questionList].answer) {
+    var results = [];
+    if (useranswer == questionBank[questionList].answer) {
         correctwrongHTML.textContent = "Correct"
         score += 5
-        console.log()
     }
     else {
         correctwrongHTML.textContent = "Wrong"
         counter -= 5
-    }
+    };
 
     if (questionList < questionBank.length - 1) {
         questionList++
@@ -38,16 +41,44 @@ function showresult() {
     }
     else {
         alert('End of Quiz!')
-        
-    }
+        endQuiz();
+    };
 
+    
 
 };
 
 
+var endQuiz = function() {
+    var name = "";
+    // While loop to not allow bank or null names
+    while (name === "" ||name === null) {
+      // ask player their name
+      name = window.prompt("What is your name?");
+    }
 
+   // CHECK STOREAGE FOR HIGHSCORE//
+ var highScore = localStorage.getItem("highScore");
+ parseInt(highScore)
 
+if (highScore === null)
+ {   highScore = 0;
+ }
 
+// player beeat highscore//
+
+if ( score > highScore) {
+    localStorage.setItem(" highScore", score);
+    localStorage.setItem("name", name);
+    
+       alert(name + " now has the high score of " + score + "!");
+      } 
+      
+      else {
+        alert(name + " did not beat the high score of " + highScore + ". Maybe next time!");
+      }
+      return;
+ };
 
 var questionBank = [
     {
@@ -55,33 +86,37 @@ var questionBank = [
         choices: ["Chicago Tigers", "Detroit Lions", "Jacksonville Jaguars", "Carolina Panthers"],
         answer: 0
     }, {
-        question: "Which player has the most superbowl wins",
+        question: "Which player has the most superbowl wins?",
         choices: ["Charles Haley", "Tom Brady", "Joe Montana", "Adam Vinatieri"],
         answer: 1
     }, {
-        question: "How long is a football field ",
+        question: "How long is a football field? ",
         choices: ["100 ft", "300ft", "360ft", "100yrds"],
         answer: 2
     }, {
-        question: "How was the temputure of the coldest nfl game?",
+        question: "How was the temperature of the coldest nfl game?",
         choices: ["32  degrees fahrenheit", "-20 degrees fahrenheit", "-15 degrees fahrenheit", "-9 degrees fahrenheit "],
         answer: 3
     },
-];
+]
 
 var questionList = 0
 var timeObj;
 var counter = 25
 
-showResponse.addEventListener("click", function () {
+
+
+showResponse.addEventListener("click", function () {  
+    removestartHTML.style.display = "none";
     thiscontainerHTML.style.display = "block";
     timeObj = setInterval(() => {
         timerHTML.textContent = counter;
-        if (counter > 1) {
+        if (counter > 1 ) {
             counter--
         }
         else {
             alert('Times up!');
+            endQuiz();
         }
 
     }, 1000);
