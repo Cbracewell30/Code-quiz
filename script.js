@@ -1,3 +1,4 @@
+// global variables
 var showResponse = document.getElementById('startbtn');
 var timerHTML = document.getElementById('timer');
 var scoreHTML = document.getElementById('score');
@@ -12,8 +13,6 @@ var removestartHTML = document.getElementById("removestart");
 var correctwrongHTML = document.getElementById("correct-wrong");
 
 
-
-
 button1HTML.addEventListener("click", showresult);
 button2HTML.addEventListener("click", showresult);
 button3HTML.addEventListener("click", showresult);
@@ -22,7 +21,7 @@ button4HTML.addEventListener("click", showresult);
 var score = 0
 
 
-
+// Answer result function
 function showresult() {
     var useranswer = this.getAttribute('data-value');
     var results = [];
@@ -34,52 +33,49 @@ function showresult() {
         correctwrongHTML.textContent = "Wrong"
         counter -= 5
     };
-
+// Array iteration
     if (questionList < questionBank.length - 1) {
         questionList++
         quizstart()
     }
     else {
-        alert('End of Quiz!')
+        alert('End of Quiz!');
+        clearInterval(timeObj);
         endQuiz();
     };
 
-    
+};
+
+// End quiz and highscore function
+
+var endQuiz = function () {
+    var name = "";
+    // While loop to not allow bank or null names
+    while (name === "" || name === null) {
+        // ask player their name
+        name = window.prompt("What is your name?");
+    }
+
+    // CHECK STOREAGE FOR HIGHSCORE//
+    var highScore = localStorage.getItem("highScore");
+    console.log(localStorage.getItem("highScore"));
+
+    // player beeat highscore//
+
+    if (score > highScore) {
+        localStorage.setItem(" highScore", score);
+        localStorage.setItem("Name", name);
+
+        alert(name + " now has the high score of " + score + "!");
+    }
+
+    else {
+        alert(name + " did not beat the high score of " + highScore + ". Maybe next time!");
+    }
 
 };
 
-
-var endQuiz = function() {
-    var name = "";
-    // While loop to not allow bank or null names
-    while (name === "" ||name === null) {
-      // ask player their name
-      name = window.prompt("What is your name?");
-    }
-
-   // CHECK STOREAGE FOR HIGHSCORE//
- var highScore = localStorage.getItem("highScore");
- parseInt(highScore)
-
-if (highScore === null)
- {   highScore = 0;
- }
-
-// player beeat highscore//
-
-if ( score > highScore) {
-    localStorage.setItem(" highScore", score);
-    localStorage.setItem("name", name);
-    
-       alert(name + " now has the high score of " + score + "!");
-      } 
-      
-      else {
-        alert(name + " did not beat the high score of " + highScore + ". Maybe next time!");
-      }
-      return;
- };
-
+// Question Array
 var questionBank = [
     {
         question: "Which team is not an NFL team?",
@@ -105,13 +101,13 @@ var timeObj;
 var counter = 25
 
 
-
-showResponse.addEventListener("click", function () {  
+// On click function
+showResponse.addEventListener("click", function () {
     removestartHTML.style.display = "none";
     thiscontainerHTML.style.display = "block";
     timeObj = setInterval(() => {
         timerHTML.textContent = counter;
-        if (counter > 1 ) {
+        if (counter > 1) {
             counter--
         }
         else {
