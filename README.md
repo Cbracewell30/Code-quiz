@@ -16,7 +16,7 @@ WHEN the game is over
 THEN I can save my initials and score
 
 
-Deployment: [ Deployment] (https://cbracewell30.github.io/NFL-quiz/)
+Deployment: [ Deployment] (https://cbracewell30.github.io/NFL-Random-Question-Quiz/)
 
 
 
